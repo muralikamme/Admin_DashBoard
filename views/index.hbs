@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoginPage</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+   
+    
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.93);
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 350px;
+      backdrop-filter: blur(3px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .login-form h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2c3e50;
+      font-size: 28px;
+    }
+    
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    .login-form input[type="text"]:focus,
+    .login-form input[type="password"]:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+      outline: none;
+    }
+    
+    .login-form input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #3498db, #2c3e50);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    .login-form input[type="submit"]:hover {
+      background: linear-gradient(135deg, #2980b9, #1a252f);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .signup-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #7f8c8d;
+      font-size: 14px;
+    }
+    
+    .signup-link a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    
+    .signup-link a:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+    
+    .error-message {
+      color: #e74c3c;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: rgba(231, 76, 60, 0.1);
+      border-radius: 5px;
+      border-left: 4px solid #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  
+
+
+  <div class="form-container">
+    <form action="/auth/loginpost" method="POST" class="login-form">
+     
+      {{#if message}}
+        <p class="error-message">{{message}}</p>
+      {{/if}}
+      <input type="text" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="submit" value="Login"/>
+     
+      <span> <a href="#">ForgotPassword</a></span>
+    </form>
+  </div>
+
+  
+</body>
+</html>

@@ -1,0 +1,104 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+    width: 100%;
+    padding: 20px;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  thead {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+
+    </style>
+</head>
+<body> --}}
+    {{>headers}}
+
+  <div>
+ <a href="/admin/addcustomer"> <button style="
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s ease;
+    ">
+    <i class="fa fa-user-plus"></i> Add New Customer
+  </button></a>
+</div>
+
+   <div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Customer Email</th>
+                <th>Customer PhoneNo</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+        <tbody>
+         
+           {{#each customdetails}}
+                    <tr>
+                        <td>{{this.name}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.phone}}</td>
+                        <td>{{this.status}}</td>
+                        
+                        <td>
+
+                        <a href="/admin/viewcustomer/{{this._id}}"><i class="fa-solid fa-eye"></i></a>
+
+
+                       <a href="/admin/editcustomerget/{{this._id}}">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                       
+                       </a>
+                       <form action="/admin/deletecustomer/{{this._id}}" method="POST">
+                        <button type="submit"> <i class="fa-solid fa-trash"></i></button>
+                       </form>
+                        </td>
+                    </tr>
+                {{/each}}
+        </tbody>
+    </table>
+
+   </div>
+{{!-- </body>
+</html> --}}

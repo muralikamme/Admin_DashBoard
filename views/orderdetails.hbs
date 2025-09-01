@@ -1,0 +1,48 @@
+<section>
+    <div class="container">
+       <ul class="nav nav-pills">
+           
+            <li class="nav-item">
+                <a class="nav-link" href="#product" data-toggle="tab">Product Details</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link"    href="#userdetails" data-toggle="tab">Customer Details</a> 
+
+            </li>
+
+             
+        </ul>
+
+             <div class="row" >
+               
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Image</th>
+                                <th>ProductName</th>
+                                <th>Description</th>
+                                <th>Regular Price</th>
+                                <th>Sales Price</th>
+
+                            </tr>
+
+                        </thead>
+                   {{#each productdetails}}
+                        <tbody>
+                              <tr>
+                                {{!-- <td>{{inc @index}}</td> --}}
+                                {{!-- <td><img src={{this.images.[0]}} alt=""></td> --}}
+                                <td>{{this.title}}</td>
+                                <td>{{this.description}}</td>
+                                <td>{{this.regularprice}}</td>
+                                <td>{{this.saleprice}}</td>
+                                <td>{{this.stockstatus}}</td>
+                           </tr>
+                        </tbody>
+                        {{/each}}
+                    </table>
+               
+             </div>
+    </div>
+</section>

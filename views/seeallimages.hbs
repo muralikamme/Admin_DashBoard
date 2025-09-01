@@ -1,0 +1,24 @@
+
+    {{>headers}}
+
+    <div >
+
+   
+   
+    {{#each images}} 
+    <img src=/{{this}} alt="" width="100px" height="100px">
+
+      <form action="/admin/replaceimg/{{.././_id}}/{{@index}}" method="post" enctype="multipart/form-data">
+     
+      <input type="file" name="newimages">
+     
+    <button type="submit">Edit</button>
+      </form>
+
+   <form action="/admin/deleteimg/{{.././_id}}/{{@index}}" method="post">
+
+     <button type="submit">Delete</button>
+   </form>
+ {{/each}}
+ 
+    </div>

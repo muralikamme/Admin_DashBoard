@@ -1,0 +1,171 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+</head>
+<body> --}}
+    <style>
+       * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    .container{
+    display: flex;
+     margin-left: 10px;
+      margin-top: 20px;
+
+
+    }
+
+    #frm{
+      text-align: center;
+      border: 2px solid black;
+     
+      
+      padding: 30px;
+      width: 400px;
+      border-radius: 8px;
+    }
+
+    label {
+      display: inline;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 90%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: darkgray;
+    }
+
+        
+
+    </style>
+
+ 
+
+    {{>headers}}
+
+ {{!-- {{updatedetails}} --}}
+ <div class="container">
+    <div id="frm" >
+ 
+        <form action="/admin/editcustomerpost/{{updatedetails._id}}" method="post" id="updateForm">
+        <img src={{updatedetails.profilePicture}} alt="" width="50px"  onerror="this.onerror=null; this.src='/public/images/user.png" >
+        <label for="name">Customer_Name:
+            <input type="text" name="name" value="{{updatedetails.name}}">
+        </label>
+        <label for="email">Customer_Email:
+            <input type="text" name="email" value="{{updatedetails.email}}">
+        </label>
+        <label for="phone">Customer_PhoneNo:
+            <input type="text" name="phone" value="{{updatedetails.phone}}">
+        </label>
+        <label for="status">
+            <select name="status" class="form-control">
+               <option value="Active" {{#eq updatedetails.status 'Active' }} selected{{/eq}}> Active</option>
+              <option value="Inactive" {{#eq updatedetails.status 'Inactive' }} selected {{/eq}}>Inactive</option>
+          </select>
+         
+        </label>
+      
+
+       <button type="submit" id="submitBtn">Update</button>
+
+        </form>
+
+
+
+    </div>
+    <div>
+      <!-- Tabs navigation -->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="#adress" data-toggle="tab">adress</a>
+  </li>
+
+</ul>
+
+    </div>
+
+
+    <div class="tab-pane fade show active" id="adress">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>addressLabel</th>
+            <th>areaBuildingAndBlock</th>
+            <th>landmark</th>
+            <th>latitude</th>
+            <th>longitude</th>
+            <th>address</th>
+            <th>city</th>
+            <th>default</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <td>{{addresses.addressLabel}}</td>
+              <td>{{addresses.areaBuildingAndBlock}}</td>
+              <td>{{addresses.landmark}}</td>
+              <td>{{addresses.latitude}}</td>
+              <td>{{addresses.address}}</td>
+              <td>{{addresses.city}}</td>
+              <td>{{addresses.default}}</td>
+            </tr>
+
+          </tbody>
+      </table>
+    </div>
+    </div>
+
+   <script>
+  const form = document.getElementById("updateForm");
+  const initialFormData = new FormData(form); // Save initial values
+
+  form.addEventListener("submit", function (e) {
+    let formChanged = false;
+    const currentFormData = new FormData(form);
+
+    // Compare current values with initial values
+    for (let [key, value] of currentFormData.entries()) {
+      if (value !== initialFormData.get(key)) {
+        formChanged = true;
+        break;
+      }
+    }
+
+    if (!formChanged) {
+      e.preventDefault(); // Stop submission
+      alert("Please update the form before submitting.");
+    }
+  });
+</script>
+
+{{!--     
+</body>
+</html> --}}

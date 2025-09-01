@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- DataTables core CSS (if not already included) -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css" />
+
+<!-- Responsive extension CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap4.min.css" />
+
+</head>
+<body>
+    
+{{!-- <script src="/admin/js/jquery.dataTables.min.js"></script>
+<script src="/admin/js/dataTables.bootstrap4.min.js"></script>
+<script src="/admin/js/dataTables.responsive.min.js"></script>
+<script src="/admin/js/responsive.bootstrap4.min.js"></script> --}}
+
+
+<!-- jQuery (Required) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables core with Bootstrap 4 styling -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Responsive extension -->
+<script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.4/js/responsive.bootstrap4.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        if (!$.fn.DataTable.isDataTable('#example21')) {
+            $('#example21').addClass('table table-bordered table-striped').DataTable({
+                "paging": true,
+            });
+        }
+    });
+</script>
+
+
+</body>
+</html>
+
+

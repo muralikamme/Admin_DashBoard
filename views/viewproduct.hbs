@@ -1,0 +1,16 @@
+
+   {{>headers}}
+    <div >
+     
+     
+        {{#each  viewproduct }}
+      <div class="card" style="width: 18rem;">
+  <img src=/{{this.images.[0]}}  alt="">
+  <div class="card-body">
+    <h5 class="card-title">{{this.title}}</h5>
+    <p class="card-text">{{this.description}}</p>
+   
+  </div>
+</div>
+{{/each}}
+    </div>
