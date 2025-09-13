@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Product=require("./productmodel")
 const Customer=require("./customermodel")
+const generateOrderId=require("../services/invoice")
 
 const orderSchema = new mongoose.Schema({
   orderId: {
@@ -59,6 +60,29 @@ const orderSchema = new mongoose.Schema({
 
 
 // pre-save hook
+
+
+orderSchema.pre("save",async function (next){
+  try{
+   if(!this.orderId){
+    this.orderId=await generateOrderId(this.constructor)
+   }
+
+   next()
+
+
+
+     
+  }catch(err){
+
+  }
+
+})
+
+
+
+
+
 
 
 orderSchema.pre("save",async function (next){

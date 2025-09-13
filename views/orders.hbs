@@ -1,57 +1,12 @@
-{{!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
-    <style>
-         table {
-    width: 100%;
-    padding: 20px;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    text-align: left;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
 
-  thead {
-    background-color: #4CAF50;
-    color: white;
-  }
-
-  th, td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  tbody tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-  }
-
-  img {
-    border-radius: 8px;
-    object-fit: cover;
-  }
-
-  caption {
-    font-size: 20px;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-    </style>
-</head>
-<body> --}}
     {{>headers}}
-    <div>
+    <style>
+        .orders{
+            padding: 20px;
+        }
+    </style>
+    <section id="content">
+    <div class="orders">
         <table class="table">
             <thead>
                 <tr>
@@ -63,7 +18,7 @@
                     <th>PaymentStatus</th>
                     <th>status</th>
                     <th>OrderDate</th>
-                    <th>Actions</th>
+                    {{!-- <th>Actions</th> --}}
                 </tr>
 
             </thead>
@@ -78,20 +33,18 @@
                 <td>{{this.status}}</td>
                 <td>{{formatLocalDateAMPM  this.orderDate}}</td>
               
-               <td>
-                <a href="/admin/singleorder/{{this._id}}" >
+               {{!-- <td> --}}
+                {{!-- <a href="/admin/singleorder/{{this._id}}" >
                     <i class="fa-solid fa-eye"></i>
-                </a>
-               </td>
+                </a> --}}
+               {{!-- </td> --}}
                  </tr>
             <tbody>
                 {{/each }}
 
         </table>
     </div>
+    </section>
    
     {{>footer}}
 
-{{!--     
-</body>
-</html> --}}

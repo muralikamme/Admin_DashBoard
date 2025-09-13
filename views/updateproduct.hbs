@@ -1,198 +1,158 @@
-{{!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Product</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
-      margin: 0;
-      padding: 0;
-    }
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 40px;
-      margin: 40px auto;
-      max-width: 1000px;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
 
-    .img img {
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      max-width: 200px;
-    }
+{{>headers}}
 
-    .frm {
-      flex: 1;
-    }
+ <section id="content">
 
-    form {
-      display: grid;
-      gap: 18px;
-    }
-
-    label {
-      display: flex;
-      flex-direction: column;
-      font-weight: 600;
-      color: #333;
-    }
-
-    input, select {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      margin-top: 6px;
-      transition: border-color 0.3s;
-    }
-
-    input:focus, select:focus {
-      border-color: #007bff;
-      outline: none;
-    }
-
-    h4 {
-      margin-top: 10px;
-      font-size: 18px;
-      color: #007bff;
-    }
-
-    button {
-      padding: 12px;
-      font-size: 16px;
-      background: #007bff;
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
-      width: 150px;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-  </style>
-</head>
-<body> --}}
-  {{>headers}}
-
-  <div class="container">
-    <div class="img">
-      <img src=/{{update.images.[0]}} alt="Product Image" style="width: 100%;">
-    </div>
-
-    <div class="frm">
-      <form action="/admin/postupdateproduct/{{update._id}}" method="POST" enctype="multipart/form-data">
-        
-        <label>Product Name
-          <input type="text" name="title" value="{{update.title}}" required>
-        </label>
-
-        <label>Description
-          <input type="text" name="description" value="{{update.description}}" required>
-        </label>
-
-        <label>Upload Image
-          <input type="file" name="images" multiple>
-        </label>
-
-        <h4>Pricing</h4>
-
-        <label>Regular Price
-          <input type="number" name="regularprice" value="{{update.regularprice}}" id="regularprice" required  oninput="CalculateSalesPrice()">
-        </label>
-
-        <label>Discount
-          <input type="number" name="discount" value="{{update.discount}}" id="discount"  oninput="CalculateSalesPrice()">
-        </label>
-
-        <label>Sale Price
-          <input type="number" name="saleprice" value="{{update.saleprice}}"  id="saleprice" oninput="CalculateSalesPrice()">
-        </label>
-
-        <label>Stock Status
-          <select name="stockstatus">
-            <option value="avaliable" >avaliable</option>
-            <option value="outofstock" >outofStock</option>
-          </select>
-        </label>
-
-        <label>Expire Date
-          <input type="date" name="expiredateofproduct" value="{{formatDate update.expiredateofproduct}}">
-        </label>
-
-        <label>Category
-          <select name="category">
-            <option value="Women's Clothing" >Women's Clothing</option>
-            <option value="kid's Clothing"> </option>
-            <option value="men's Clothing" >Men's Clothing</option>
-          </select>
-        </label>
-
-        <label>Vendor
-          <input type="text" name="vendor" value="{{update.vendor}}">
-        </label>
-
-        <label>Collection
-          <input type="text" name="collection" value="{{update.collection}}">
-        </label>
-
-        <label>Tags
-          <select name="tags">
-            <option value="Women's Clothing" >Women's Clothing</option>
-            <option value="kid's Clothing" >Kid's Clothing</option>
-            <option valu="men's Clohthing">men's Clohthing</option>
-          </select>
-        </label>
-
-        <button type="submit">Update Product</button>
-      </form>
-    </div>
-  <div>
+<div class="container py-5">
+  <div class="row g-4">
     
-    <a href="/admin/seeallimages/{{update._id}}">Seeallimages</a>
-   
-  </div>
-  </div>
+    <!-- Product Image -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="/{{update.images.[0]}}" class="card-img-top" alt="Product Image">
+      </div>
+    </div>
 
+    <!-- Form Section -->
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+        <h3 class="mb-4 text-center">Update Product</h3>
+        <form action="/admin/postupdateproduct/{{update._id}}" method="POST" enctype="multipart/form-data" id="updateForm">
+          
+          <div class="mb-3">
+            <label class="form-label">Product Name</label>
+            <input type="text" class="form-control" name="title" value="{{update.title}}" required>
+          </div>
 
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" name="description" value="{{update.description}}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Upload Image</label>
+            <input type="file" class="form-control" name="images" value="{{update.images.[0]}}" multiple>
+          </div>
+
+          <h4 class="mt-4">Pricing</h4>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Regular Price</label>
+              <input type="number" class="form-control" name="regularprice" value="{{update.regularprice}}" id="regularprice" required oninput="calculateSalePrice()">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Discount</label>
+              <input type="number" class="form-control" name="discount" value="{{update.discount}}" id="discount" oninput="calculateSalePrice()">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Sale Price</label>
+              <input type="number" class="form-control" name="saleprice" value="{{update.saleprice}}" id="saleprice" oninput="calculateSalePrice()">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Stock Status</label>
+            <select class="form-select" name="stockstatus">
+              <option value="avaliable">Available</option>
+              <option value="outofstock">Out of Stock</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Expire Date</label>
+            <input type="date" class="form-control" name="expiredateofproduct" value="{{formatDate update.expiredateofproduct}}">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" name="category">
+              <option value="grocery">grocery</option>
+              <option value="ecommerce">ecommerce</option>
+              <option value="food">food</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Vendor</label>
+            <input type="text" class="form-control" name="vendor" value="{{update.vendor}}">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Collection</label>
+            <input type="text" class="form-control" name="collection" value="{{update.collection}}">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Tags</label>
+            <select class="form-select" name="tags">
+              <option value="Women's Clothing">Women's Clothing</option>
+              <option value="kid's Clothing">Kid's Clothing</option>
+              <option value="men's Clothing">Men's Clothing</option>
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <button type="submit" class="btn btn-primary">Update Product</button>
+            <a href="/admin/seeallimages/{{update._id}}" class="btn btn-secondary">See All Images</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
 <script>
 
 
-    function CalculateSalesPrice(){
-        let RegularPrice=parseFloat(document.getElementById("regularprice").value)|| 0
-        let discount=parseFloat(document.getElementById("discount").value)|| 0
+    function calculateSalePrice(){
+      let RegularPrice=parseFloat(document.getElementById("regularprice").value) || 0
+     
+      let discount=parseFloat(document.getElementById("Discount").value) || 0
+     
 
+      let saleprice=RegularPrice-(RegularPrice*discount /100)
+      document.getElementById("salePrice").value=saleprice.toFixed(2)
 
-        let salePrice=(RegularPrice-(RegularPrice*discount/100)).toFixed()
-        document.getElementById("saleprice").value=salePrice
 
     }
 
 
 
 
+</script>
 
+<script>
+  const form = document.getElementById("updateForm");
+  const initialFormData = new FormData(form); // Save initial values
+
+  form.addEventListener("submit", function (e) {
+    let formChanged = false;
+    const currentFormData = new FormData(form);
+
+    // Compare current values with initial values
+    for (let [key, value] of currentFormData.entries()) {
+      if (value !== initialFormData.get(key)) {
+        formChanged = true;
+        break;
+      }
+    }
+
+    if (!formChanged) {
+      e.preventDefault(); // Stop submission
+      alert("Please update the form before submitting.");
+    }
+  });
 </script>
 
 
-{{!-- 
 
-</body>
-</html> --}}
+

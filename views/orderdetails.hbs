@@ -1,21 +1,33 @@
-<section>
-    <div class="container">
+
+{{>headers}}
+<style>
+
+.orderdetails{
+    padding: 20px;
+    background-color: darkslategrey;
+    color: aliceblue;
+
+}
+</style>
+
+<section id="content">
+    <div class="orderdetails">
        <ul class="nav nav-pills">
            
-            <li class="nav-item">
-                <a class="nav-link" href="#product" data-toggle="tab">Product Details</a>
+            <li class="nav-item" >
+                <a class="nav-link" href="#product" data-toggle="tab" style="color: aliceblue;">Product Details</a>
             </li>
-            <li class="nav-item">
-                <a  class="nav-link"    href="#userdetails" data-toggle="tab">Customer Details</a> 
+            <li class="nav-item" >
+                <a  class="nav-link"    href="#userdetails" data-toggle="tab" style="color: aliceblue;">Customer Details</a> 
 
             </li>
 
              
         </ul>
 
-             <div class="row" >
+             <div class="orderdeatils" >
                
-                    <table >
+                    <table class="table" >
                         <thead>
                             <tr>
                                 <th>S.No</th>
@@ -24,6 +36,7 @@
                                 <th>Description</th>
                                 <th>Regular Price</th>
                                 <th>Sales Price</th>
+                                <th>StockStatus</th>
 
                             </tr>
 
@@ -31,8 +44,8 @@
                    {{#each productdetails}}
                         <tbody>
                               <tr>
-                                {{!-- <td>{{inc @index}}</td> --}}
-                                {{!-- <td><img src={{this.images.[0]}} alt=""></td> --}}
+                                <td>{{inc @index}}</td>
+                                <td><img src=/{{this.images.[0]}} alt="" width="50px"></td>
                                 <td>{{this.title}}</td>
                                 <td>{{this.description}}</td>
                                 <td>{{this.regularprice}}</td>

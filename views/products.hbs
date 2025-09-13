@@ -1,71 +1,16 @@
 {{>headers}}
-{{!-- 
+
+
 <style>
-  table {
-    width: 100%;
+  .product{
     padding: 20px;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    text-align: left;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-
-  thead {
-    background-color: #4CAF50;
-    color: white;
-  }
-
-  th, td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  tbody tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-  }
-
-  img {
-    border-radius: 8px;
-    object-fit: cover;
-  }
-
-  caption {
-    font-size: 20px;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  #btn-div{
-margin-left: 200px;
-
-  }
-  #btn{
-    background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.3s ease;
+    background-color: darkslategrey;
+    color: aliceblue;
   }
 </style>
-  --}}
-<div>
-  <div id="btn-div">
- <a href="/admin/addproducts"> <button  id="btn"
-    <i class="fa fa-user-plus"></i> AddProduct
-  </button></a>
-</div>
+<section id="content">
+<div class="product">
+  
   <table id="example21">
     <thead>
       <tr>
@@ -91,8 +36,15 @@ margin-left: 200px;
         <td>{{this.description}}</td>
         <td>{{this.regularprice}}</td>
         <td>{{this.saleprice}}</td>
-        <td>{{this.category}}</td>
+       <td>
+  {{#if this.category}}
+    {{this.category.name}}
+  {{else}}
+    Missing
+  {{/if}}
+</td>
         <td>{{this.vendor}}</td>
+     
         <td>{{this.createdAt}}</td>
         <td>{{this.stockstatus}}</td>
         <td>
@@ -118,5 +70,6 @@ margin-left: 200px;
     </tbody>
   </table>
 </div>
+</section>
 
 {{>footer}}

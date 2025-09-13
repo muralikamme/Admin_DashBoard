@@ -1,0 +1,234 @@
+{{> headers}}
+
+{{!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+<style>
+    .category {
+        padding: 20px;
+    }
+    img {
+        max-width: 100px;
+    }
+</style>
+
+<section id="content">
+    <div class="category container">
+        <table id="example21" class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each allcategory}}
+                <tr>
+                    <td>{{inc @index}}</td>
+                    <td><img src="{{this.picture}}" alt="Category Image" class="img-thumbnail"/></td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.type}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.createdAt}}</td>
+                    <td>
+                        <form action="/admin/editcategory/{{this._id}}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </form>
+
+                        <form action="/admin/deletecategory/{{this._id}}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+     <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 style="color: black; font-weight: bold; font-size: 40px;">Add Category</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+    style="background: none; border: none; font-size: 20px; color: black; font-weight: bold;">x</button>
+            </div>
+            <form id="addCategoryForm" action="/admin/addcategory" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label for="categoryName">Name</label> <span style="color: red;">*</span>
+                    <input type="text" class="form-control" id="category" name="name" placeholder="Title" required
+                        minlength="2" maxlength="40">
+                        <label for="categoryType">Type</label> <span style="color: red;">*</span>
+                    <input type="text" class="form-control" id="category" name="Type" placeholder="Title" required
+                        minlength="2" maxlength="40">
+                    <div id="error-message" style="color: red; font-size: 12px; display: none;">
+                        Name should contain only letters between 2 and 50 characters
+                    </div>
+                    <label for="Category Picture">Image</label><span style="color: red;">*</span><br>
+                    <input type="file" class="form-control" name="categoryPicture" required id="categoryPicture"
+                        accept=".jpg,.jpeg,.png">
+                    <small id="charCount">Recommended dimensions: 4:3 (1200x900) px max  2 MB</small>
+                    <div id="imageError" style="color: red; font-size: 12px; display: none;">
+                        Please upload an image with dimensions 4:3 (1200x900) max  2 MB.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="submitBtn" class="btn btn-success"
+                        style="background-color: rgb(0, 0, 0); color:white">Add Category</button>
+                </div>
+            </form>
+        </div>
+
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: black; font-weight: bold;">Update Category</h3>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+    style="background: none; border: none; font-size: 20px; color: black; font-weight: bold;">x</button>
+
+            </div>
+            <form id="updateServiceForm" action="/admin/updatecategory/{{this._id}}" method="post"
+                enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label for="categoryName">Name</label>
+                    <input type="text" class="form-control" id="category" name="name" placeholder="Title" minlength="2"
+                        maxlength="40">
+                    <div id="error-message" style="color: red; font-size: 12px; display: none;">
+                        Name should contain only letters between 2 and 50 characters
+                    </div>
+                    <label for="Category Picture">Image</label><br>
+                    <input type="file" class="form-control" name="categoryPicture" id="categoryUpdatePicture"
+                        accept=".jpg,.jpeg,.png">
+                    <div id="imageUpdateError" style="color: red; font-size: 12px; display: none;">
+                        Please upload an image with dimensions 4:3 (1200x900) max  2 MB.
+                    </div>
+                    <label>Status</label><br>
+                    <select name="status" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="updateButton" class="btn btn-success">Update</button>
+                   {{!-- <a href="/admin/allcategories">cancel</a> --}}
+                   {{!-- <button>Cancel</button> --}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+     const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+
+    const addForm = document.getElementById('addCategoryForm');
+    const updateForm = document.getElementById('updateServiceForm');
+    const nameInputs = document.querySelectorAll('input[name="name"]');
+    const addImageInput = document.getElementById('categoryPicture');
+    const updateImageInput = document.getElementById('categoryUpdatePicture');
+    const submitBtn = document.getElementById('submitBtn');
+    const updateBtn = document.getElementById('updateButton');
+    const addNameError = addForm.querySelector('#error-message');
+    const updateNameError = updateForm.querySelector('#error-message');
+    const addImgError = document.getElementById('imageError');
+    const updateImgError = document.getElementById('imageUpdateError');
+     
+
+
+
+    function validateName(input, errorEl) {
+        const val = input.value.trim();
+        const valid = /^[A-Za-z ]{2,50}$/.test(val);
+        errorEl.style.display = valid ? 'none' : 'block';
+        return valid;
+    }
+
+
+    function validateImage(input, errorEl, button, callback) {
+    const file = input.files[0];
+    if (!file) {
+        // no image → not an error for update form
+        errorEl.style.display = 'none';
+        button.disabled = false;
+        callback(true);   // ✅ treat as valid
+        return;
+    }
+     if (!validTypes.includes(file.type)) {
+        errorEl.textContent = 'Invalid file type. Only .jpg, .jpeg, .png allowed.';
+        errorEl.style.display = 'block';
+        input.value = ""; 
+        button.disabled = false;   // ✅ don't block other updates
+        callback(true);             // ✅ allow form submission without image
+        return;
+    }
+
+if (file.size > maxSize) {
+        errorEl.textContent = 'File size must not exceed 2 MB.';
+        errorEl.style.display = 'block';
+        input.value = "";
+        button.disabled = false;
+        callback(true);             // ✅ allow form submission without image
+        return;
+    }
+
+
+    const img = new Image();
+    img.onload = () => {
+        const aspectRatio = img.width / img.height;
+        const tolerance = 0.05;
+
+        if (Math.abs(aspectRatio - (4 / 3)) <= tolerance) {
+            errorEl.style.display = 'none';
+            button.disabled = false;
+            callback(true);   // ✅ valid image
+        } else {
+            errorEl.textContent = 'Image must have a 4:3 aspect ratio (e.g. 1200x900, 800x600) under 2MB.';
+            errorEl.style.display = 'block';
+            input.value = "";
+            button.disabled = false;
+            callback(true);   // ✅ allow form without image
+        }
+    };
+    img.src = URL.createObjectURL(file);
+}
+
+
+// Real-time name input validation
+    nameInputs.forEach(input => {
+        input.addEventListener('input', function () {
+            const isUpdate = input.closest('form').id === 'updateServiceForm';
+            validateName(input, isUpdate ? updateNameError : addNameError);
+        });
+    });
+
+
+ // Add Form Submit
+    addForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const nameValid = validateName(addForm.querySelector('input[name="name"]'), addNameError);
+        validateImage(addImageInput, addImgError, submitBtn, function (imageValid) {
+            if (nameValid && imageValid) {
+                addForm.querySelector('input[name="name"]').value = addForm.querySelector('input[name="name"]').value.trim()
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Adding...';
+                addForm.submit();
+            }
+        });
+    });
+
+</script>

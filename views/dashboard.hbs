@@ -1,31 +1,228 @@
+{{>headers}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    body {
+        background-color: #f0f2f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .dashboard {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        padding: 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
 
 
-  {{>headers}}
+   /*
+    .card:nth-child(1) {
+        border-color: #4e73df;
+    }
+    .card:nth-child(2) {
+        border-color: #1cc88a;
+    }
+    .card:nth-child(3) {
+        border-color: #36b9cc;
+    }
+    .card:nth-child(4) {
+        border-color: #f6c23e;
+    }
+    .card:nth-child(5) {
+        border-color: #e74a3b;
+    }
+    .card:nth-child(6) {
+        border-color: #6f42c1;
+    }
+    .card:nth-child(7) {
+        border-color: #fd7e14;
+    }
+*/
 
+    .card {
+        background: #ffffff;
+        border-radius: 12px;
+       /** {{!-- box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);  --}}  */
+        width: 220px;
+        padding: 24px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border-left: 4px solid;
+    }
 
+    .card:hover {
+        transform: translateY(-5px);
+       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); 
+    /*   background-color: #2c0764; --}}*/
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <!-- Flexbox Nav -->
-      <ul class="nav d-flex flex-row">
-        <li class="nav-item">
-          <a href="#" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">About</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Contact Us</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-  
-					
-	
+    
+    .card h2 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+        text-align: center;
+        color: #5a5c69;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
 
+    .card p {
+        font-size: 1.8em;
+        color: #5a5c69;
+        text-align: center;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .card-icon {
+        position: absolute;
+        top: 12px;
+        left: 8px;
+        opacity: 0.2;
+        font-size: 1.5em;
+        
+    }
+    .chart{
+      width: 400px;
+    }
+     
+
+    @media (max-width: 768px) {
+        .dashboard {
+            justify-content: center;
+        }
+        
+        .card {
+            width: calc(50% - 24px);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            width: 100%;
+        }
+    }
+</style>
+
+<section id="content">
+    <div class="dashboard">
+        <div class="card">
+            <div class="card-icon">📦</div>
+            <h2> Total Orders</h2>
+            <p>{{allorders}}</p>
+              <br>
+            
+            <a href="/admin/orders" style="text-align: center;"> <i class="fa-solid fa-arrow-right"></i></a>
+            
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🛍️</div>
+            <h2> Total Products
+              </h2>
+            <p>{{allProducts}}</p>
+              <br>
+              
+            
+               <a href="/admin/products" style="text-align: center;"><i class="fa-solid fa-arrow-right"></i></a>
+               
+        </div>
+
+        <div class="card">
+            <div class="card-icon">👥</div>
+            <h2>  Total Customers 
+             </h2>
+            <p>{{allcustomers}}</p>
+              <br>
  
+             <a href="/admin/customers" style="text-align: center;"><i class="fa-solid fa-arrow-right"></i></a>
+            
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💰</div>
+            <h2> Total Revenue
+             </h2>
+            <p>{{totalRevenu}}</p>
+              <br>
+              
+          <a href="#" style="text-align: center;">    <i class="fa-solid fa-arrow-right"></i> </a>
+         
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🚚</div>
+            <h2>
+                Shipped Orders
+             </h2>
+            <p>{{status.Shipped}}</p>
+              <br>
+              
+              <a href="#" style="text-align: center;"><i class="fa-solid fa-arrow-right"></i></a>
+              
+        </div>
+
+        <div class="card">
+            <div class="card-icon">✅</div>
+            <h2> Delivered Orders
+              </h2>
+            <p>{{status.Delivered}}</p>
+              <br>
+               
+              <a href="#" style="text-align: center;"><i class="fa-solid fa-arrow-right"></i></a>
+            
+        </div>
+
+        <div class="card" >
+            <div class="card-icon">⚙️</div>
+            <h2> Processing Orders
+              </h2>
+            <p>{{status.Processing}}</p>
+            <br><br>
+             <div class="arrow">
+              <a href="#" style="text-align: center;"><i class="fa-solid fa-arrow-right"></i></a>
+              </div>
+        </div>
+       
+
+  
+
+
+
+    </div>
+    <div class="chart">
+    <canvas id="mychart"></canvas>
+</div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('mychart').getContext('2d');
+
+  const data = {
+    labels: ['Orders', 'Products', 'Customers'],
+    datasets: [{
+      label: 'count',
+      data: [{{allorders}}, {{allProducts}}, {{allcustomers}}],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const config = {
+    type: 'doughnut', // You can change to 'bar', 'line', etc.
+    data: data,
+    options: {
+      responsive: true
+    }
+  };
+
+  const myChart = new Chart(ctx, config);
+</script>

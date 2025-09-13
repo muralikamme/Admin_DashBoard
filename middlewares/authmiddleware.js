@@ -3,7 +3,12 @@ const path=require("path")
 const fs=require("fs")
 const TokenModel = require("../Model/tokenmodel");
 
-const User=require("../Model/user")
+require("dotenv").config()
+
+
+// const User=require("../Model/user")
+
+const Customer=require("../Model/customermodel")
 
 
 
@@ -22,29 +27,39 @@ exports.isValidToken = async (req, res, next) => {
             return res.status(401).json({ message: "Invalid Token" });
         }
         const decodedId = decoded.id;
-        const userExists = await User.findById(decodedId);
+        const userExists = await Customer.findById(decodedId);
         if (!userExists) {
             return res.status(401).json({ message: "User not found" })
         }
-        const userTokenDocument = await TokenModel.findOne({ User: userExists._id });
-        if (userTokenDocument) {
-            const tokenExists = userTokenDocument.tokens.includes(token);
-            if (tokenExists) {
-                req.session.isAuth = true;
-                req.session.user = userExists;
-                req.session.token = token;
-                next();
-            } else {
-                return res.status(401).json({ message: "Token has been invalidated" });
-            }
-        } else {
+         if(userExists){
+
+           req.session.isAuth = true;
+           req.session.user = userExists;
+           req.session.isRole=userExists.role
+           req.session.token = token;
+           req.session.save();
+           next();
+         } else {
              return res.status(401).json({ message: "Token not found" });
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         return res.status(500).json({ message: "Error Token" });
     }
-};
+  }
+
+
+
+exports.generatedOtp=()=>{
+  return Math.floor(100000+Math.random()*900000)
+}
+
+
+
+
+
+
+
 //PASSWORD VALIDATIONS
 exports.isValidPassword = (password) => {
     return (
@@ -53,16 +68,17 @@ exports.isValidPassword = (password) => {
 };
 //generate token
 exports.generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
+    return jwt.sign( {id} , process.env.JWT_SECRET_KEY, {
         expiresIn: "364d"
     });
 };
 //ADMIN LOGIN OR NOT
 module.exports.isAdminAuth = (req, res, next) => {
+    // console.log(req.session.admin,"adminnnn")
     if (req.session.isAuth && req.session.admin && req.session.admin.role === "admin") {
       return next();
     }
-    req.flash("error", "Unauthorized access");
+    req.flash("error_msg", "Unauthorized access");
     return res.redirect("/auth/login");
   };
 

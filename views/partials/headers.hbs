@@ -12,8 +12,11 @@
 
    <!-- Font Awesome 6 CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-
+{{!-- Toaster link --}}
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+  />
 	<!-- My CSS -->
 	{{!-- <link rel="stylesheet" href="../public/style.css"> --}}
 	 <!-- Bootstrap + Summernote + jQuery -->
@@ -134,9 +137,9 @@ body {
 #sidebar .side-menu li {
 	height: 48px;
 	background: transparent;
-	margin-left: 6px;
+ /* margin-left: 0; --}} **/
 	border-radius: 48px 0 0 48px;
-	padding: 4px;
+	padding: 6px;
 }
 #sidebar .side-menu li.active {
 	background: var(--grey);
@@ -167,6 +170,7 @@ body {
 #sidebar .side-menu li a {
 	width: 100%;
 	height: 100%;
+	margin-left: -10px;
 	background: var(--light);
 	display: flex;
 	align-items: center;
@@ -208,10 +212,6 @@ body {
   bottom: 40px; /* İkinci son öğeyi yukarı kaydır */
 }
 /* SIDEBAR */
-
-
-
-
 
 /* CONTENT */
 #content {
@@ -483,66 +483,6 @@ body.dark #content nav .profile-menu li a {
 
 
 
-/* NAVBAR */
-
-
-/*  
- .container {
-    background: linear-gradient(145deg, #141E30, #243B55);
-      color: rgb(0, 0, 0);
-      display: flex;
-      color: aliceblue;
-      font-weight: bold;
-      width: 100%;
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .rightside {
-      flex: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .leftside {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      
-      padding: 1rem;
-      border-radius: 10px;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 0.6rem;
-      border-radius: 8px;
-      
-      margin-top: 5px;
-    }
-
-    button {
-      background: #010101;
-      border: none;
-      color: aliceblue;
-      
-      padding: 5px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-
-    button:hover {
-      background: #002daa;
-    }
-
-    .btn-group {
-      display: flex;
-      justify-content: space-between;
-    }
- */
 
 
 /* MAIN */
@@ -817,6 +757,29 @@ body.dark #content nav .profile-menu li a {
 		display: none;
 	}
 }
+/* Success toast - Green */
+.toast-success {
+  background-color: #28a745 !important;  /* Bootstrap green */
+  color: #fff !important;
+}
+
+/* Error toast - Red */
+.toast-error {
+  background-color: #dc3545 !important;  /* Bootstrap red */
+  color: #fff !important;
+}
+
+/* Info toast - Blue */
+.toast-info {
+  background-color: #007bff !important;  /* Bootstrap blue */
+  color: #fff !important;
+}
+
+/* Warning toast - Orange */
+.toast-warning {
+  background-color: #fd7e14 !important;  /* Bootstrap orange */
+  color: #fff !important;
+}
 
 
 
@@ -881,65 +844,72 @@ body.dark #content nav .profile-menu li a {
 			<i class='bx bxs-smile  bx-lg'></i>
 			<span class="text">AdminHub</span>
 		</a>
-		<ul class="side-menu top">
-			<li class="active">
-				<a href="/admin/dashboard">
-					<i class='bx bxs-dashboard bx-sm' ></i>
-					<span class="text">Dashboard</span>
-				</a>
-			</li>
-			<li>
-				<a href="/admin/addproducts">
-					<i class='bx bxs-shopping-bag-alt bx-sm' ></i>
-					<span class="text">Add Products</span>
-				</a>
-			</li>
-			<li>
-				<a href="/admin/products">
-					<i class='bx bxs-doughnut-chart bx-sm' ></i>
-					<span class="text">Products</span>
-				</a>
-			</li>
-			<li>
-				<a href="/admin/customers">
-					<i class='bx bxs-message-dots bx-sm' ></i>
-					<span class="text">Customers</span>
-				</a>
-			</li>
-			<li>
-				<a href="/admin/customerdetails">
-					<i class='bx bxs-group bx-sm' ></i>
-					<span class="text">Customers Deatils</span>
-				</a>
-			</li>
-            <li>
-				<a href="/admin/orders">
-					<i class='bx bxs-group bx-sm' ></i>
-					<span class="text">Orders</span>
-				</a>
-			</li>
-            <li>
-				<a href="/admin/orderdetails">
-					<i class='bx bxs-group bx-sm' ></i>
-					<span class="text">Orders Details</span>
-				</a>
-			</li>
-              <li>
-				<a href="/admin/refund">
-					<i class='bx bxs-group bx-sm' ></i>
-					<span class="text">Refunds</span>
-				</a>
-			</li>
-		</ul>
+	<ul class="side-menu top">
+    <li class="active">
+        <a href="/admin/dashboard">
+            <i class='bx bxs-dashboard bx-sm'></i>
+            <span class="text">Dashboard</span>
+        </a>
+    </li>
+	<li>
+        <a href="/admin/adminProfile">
+            <i class='bx bxs-shopping-bag-alt bx-sm'></i>
+            <span class="text">AdminProfile</span>
+        </a>
+    </li>
+    <li>
+        <a href="/admin/addproducts">
+            <i class='bx bxs-shopping-bag-alt bx-sm'></i>
+            <span class="text">Add Products</span>
+        </a>
+    </li>
+    <li>
+        <a href="/admin/products">
+            <i class='bx bxs-doughnut-chart bx-sm'></i>
+            <span class="text">Products</span>
+        </a>
+    <li>
+        <a href="/admin/allcategorys">
+            <i class='bx bxs-group bx-sm'></i>
+            <span class="text">Category</span>
+        </a>
+    </li>
+    </li>
+    <li>
+        <a href="/admin/customers">
+            <i class='bx bxs-message-dots bx-sm'></i>
+            <span class="text">Customers</span>
+        </a>
+    </li>
+    <li>
+        <a href="/admin/orders">
+            <i class='bx bxs-group bx-sm'></i>
+            <span class="text">Orders</span>
+        </a>
+    </li>
+    <li>
+        <a href="/admin/orderdetails">
+            <i class='bx bxs-group bx-sm'></i>
+            <span class="text">Orders Details</span>
+        </a>
+    </li>
+    <li>
+        <a href="/admin/refund">
+            <i class='bx bxs-group bx-sm'></i>
+            <span class="text">Refunds</span>
+        </a>
+    </li>
+</ul>
+
 		<ul class="side-menu bottom">
-			<li>
+			<li >
 				<a href="#">
 					<i class='bx bxs-cog bx-sm bx-spin-hover' ></i>
 					<span class="text">Settings</span>
 				</a>
 			</li>
-			<li>
-				<a href="#" class="logout">
+			<li >
+				<a href="/auth/login" class="logout">
 					<i class='bx bx-power-off bx-sm bx-burst-hover' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -951,7 +921,7 @@ body.dark #content nav .profile-menu li a {
 
 
 	<!-- CONTENT -->
-	<section id="content">
+	<section id="content" >
 		<!-- NAVBAR -->
 <nav>
     <i class='bx bx-menu bx-sm' ></i>
@@ -963,11 +933,11 @@ body.dark #content nav .profile-menu li a {
         </div>
     </form>
     <input type="checkbox" class="checkbox" id="switch-mode" hidden />
-    <label class="swith-lm" for="switch-mode">
-        <i class="bx bxs-moon"></i>
-        <i class="bx bx-sun"></i>
-        <div class="ball"></div>
-    </label>
+<label class="swith-lm" for="switch-mode">
+    <i class="bx bxs-moon"></i>
+    <i class="bx bx-sun"></i>
+    <div class="ball"></div>
+</label>
 
     <!-- Notification Bell -->
     <a href="#" class="notification" id="notificationIcon">
@@ -997,24 +967,38 @@ body.dark #content nav .profile-menu li a {
         </ul>
     </div>
 </nav>
+</section>
 <!-- NAVBAR -->
 
 
 	
 	
 
+
 	<script>
    const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
+// highlight based on current URL
 allSideMenu.forEach(item => {
-    const li = item.parentElement;
+  const li = item.parentElement;
 
-    item.addEventListener('click', function () {
-        allSideMenu.forEach(i => {
-            i.parentElement.classList.remove('active');
-        })
-        li.classList.add('active');
-    })
+  if (item.getAttribute("href") === window.location.pathname) {
+
+    li.classList.add("active");
+  } else {
+    li.classList.remove("active");
+  }
+});
+
+// also handle click (so it updates immediately without reload)
+allSideMenu.forEach(item => {
+  const li = item.parentElement;
+  item.addEventListener('click', function () {
+    allSideMenu.forEach(i => {
+      i.parentElement.classList.remove('active');
+    });
+    li.classList.add('active');
+  });
 });
 
 // TOGGLE SIDEBAR
@@ -1117,6 +1101,90 @@ window.addEventListener('click', function (e) {
       });
     });
 	</script>
+
+
+	 <!-- jQuery first -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <script>
+   toastr.options = {
+  // Basic Behavior
+  closeButton: true,       // Show close button
+  progressBar: true,       // Show progress bar (countdown)
+  timeOut: 3000,           // Auto-close after 3s (set 0 to disable)
+  extendedTimeOut: 1000,    // Additional time after hover/click
+
+  // Positioning
+  positionClass: "toast-top-right",  // Options: toast-top-right, toast-bottom-right, toast-top-left, toast-bottom-left, toast-top-full-width, toast-bottom-full-width
+
+  // Interaction
+  preventDuplicates: true, // Block duplicate toasts
+  newestOnTop: true,       // New toasts appear on top
+  draggable: true,         // Allow dragging to dismiss
+  closeOnHover: true,      // Close on mouse hover
+  tapToDismiss: false,     // Close on click (if not using buttons)
+
+  // Styling & Animations
+  showEasing: "swing",     // Animation easing (swing, linear)
+  hideEasing: "linear",
+  showMethod: "fadeIn",    // fadeIn, slideDown, etc.
+  hideMethod: "fadeOut",
+  
+  // Accessibility
+  ariaHidden: false,       // Hide from screen readers when closed
+  escapeHtml: false,       // Allow HTML in messages (careful with XSS!)
+
+  // Callbacks
+  onclick: null,           // Callback when toast is clicked
+  onCloseClick: null,      // Callback when close button is clicked
+  onShown: null,           // Callback after toast appears
+  onHidden: null           // Callback after toast disappears
+};
+
+    // Show flash messages with toastr
+    {{#if success_msg}}
+      toastr.success("{{success_msg}}");
+    {{/if}}
+
+    {{#if error_msg}}
+      toastr.error("{{error_msg}}");
+    {{/if}}
+  </script>
+
+
+  <script>
+	// Function to apply theme
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+}
+
+// Toggle theme
+function toggleTheme() {
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(newTheme);
+}
+
+// Initialize theme on page load
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+}
+
+// Event listener for theme switch button
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+
+    const themeToggleBtn = document.getElementById('switch-mode');
+    themeToggleBtn.addEventListener('click', toggleTheme);
+	console.log(themeToggleBtn,"theme")
+});
+
+  </script>
+    
 	
 </body>
 </html>

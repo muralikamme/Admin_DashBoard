@@ -125,9 +125,12 @@
   <div class="form-container">
     <form action="/auth/loginpost" method="POST" class="login-form">
      
-      {{#if message}}
-        <p class="error-message">{{message}}</p>
-      {{/if}}
+      {{!-- {{#if success_msg}}
+        <p class="success-message" style="color: green; text-align:center">{{success_msg}}</p>
+        {{else}}
+        <p class="error-message">{{error_msg}}</p>
+      {{/if}} --}}
+
       <input type="text" name="email" placeholder="Email Address" required />
       <input type="password" name="password" placeholder="Password" required />
       <input type="submit" value="Login"/>

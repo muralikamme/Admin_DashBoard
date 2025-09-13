@@ -1,12 +1,40 @@
 
     {{>headers}}
 
-    <div >
+   
+<section id="content">
+   <div class="container my-4">
+    <h4><strong>Product_Id:</strong>{{_id}}</h4>
+  <div class="row g-4">
+    {{#each images}} 
+      <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm h-100 text-center">
+          <img src="/{{this}}" class="card-img-top p-3" alt="Product Image" style="height: 150px; object-fit: contain;">
+          <div class="card-body">
+            
+            <!-- Replace Image Form -->
+            <form action="/admin/replaceimg/{{../_id}}/{{@index}}" method="post" enctype="multipart/form-data" class="mb-2">
+              <input type="file" name="newimages" class="form-control mb-2" required>
+              <button type="submit" class="btn btn-sm btn-primary w-100">Replace</button>
+            </form>
+
+            <!-- Delete Image Form -->
+            <form action="/admin/deleteimg/{{../_id}}/{{@index}}" method="post">
+              <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+</section>
 
    
+
    
-    {{#each images}} 
-    <img src=/{{this}} alt="" width="100px" height="100px">
+    {{!-- <img src=/{{this}} alt="" width="100px" height="100px">
 
       <form action="/admin/replaceimg/{{.././_id}}/{{@index}}" method="post" enctype="multipart/form-data">
      
@@ -20,5 +48,4 @@
      <button type="submit">Delete</button>
    </form>
  {{/each}}
- 
-    </div>
+  --}}
