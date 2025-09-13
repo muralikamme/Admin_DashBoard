@@ -1,9 +1,15 @@
 const adminRoutes=require("express").Router()
 
  const adminController=require("../../controller/Admin/adminController")
+
 const category=require("../../controller/Admin/category")
+const banners=require("../../controller/Admin/bannercontroller")
 
  adminRoutes.get("/dashboard",adminController.dashboard)
+//  --------banners-------
+ adminRoutes.get("/banners",banners.allBanners)
+// -----banners
+
  adminRoutes.get("/adminProfile",adminController.adminProfile)
  adminRoutes.post("/updateprofile/:id",adminController.updateProfile)
 //  adminRoutes.post("/deleteadmin/:id",adminController.Deleteadmin)
