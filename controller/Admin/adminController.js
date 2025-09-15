@@ -10,6 +10,7 @@ let address = require("../../Model/addressModel");
 let category=require("../../Model/categorymodel")
 const User=require("../../Model/user")
 const path = require("path");
+const {validationResult} = require("express-validator")
 const bcrypt=require("bcryptjs")
 
 module.exports = {
@@ -52,7 +53,9 @@ module.exports = {
   adminProfile: async (req, res) => {
     try {
 
-      const adminprofile = req.session.admin
+      const adminId = req.session.admin._id
+
+   const adminprofile = await  User.findById(adminId)
       return res.render(
         "adminProfile",{
           adminprofile 
@@ -67,10 +70,18 @@ module.exports = {
 
 updateProfile: async (req, res) => {
     try {
+      // const errors = validationResult(req);
+
+    // if (!errors.isEmpty()) {
+    //   console.log({ errors: errors.array() })
+    //   req.flash("error_msg","Invalid input fields")
+    //   return res.redirect("/admin/adminProfile")
+       
+    // }
         let { id } = req.params;
         console.log(id, "User ID");
 
-        const { email, phone, name, newPassword } = req.body;
+        const { email, phone, name, newPassword ,status} = req.body;
         const profile = req.files?.newprofilepic || null; // Optional chaining in case no file sent
         console.log(profile, "Uploaded File");
 
@@ -95,6 +106,7 @@ updateProfile: async (req, res) => {
         if (name) adminExists.name = name;
         if (email) adminExists.email = email;
         if (phone) adminExists.phone = phone;
+        if (status) adminExists.status = status
         if (newpass) adminExists.password = newpass;
         if (newpic) adminExists.profilePicture = newpic;
 
