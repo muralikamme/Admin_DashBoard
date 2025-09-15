@@ -11,7 +11,8 @@ const ProductSchema = new mongoose.Schema({
   category:{type:mongoose.Schema.Types.ObjectId,ref:"category"} ,
   vendor: { type: String },
   collection: { type: String },
-  tags: { type: String }
+  tags: { type: String },
+  
  
 }, { timestamps: true });
 

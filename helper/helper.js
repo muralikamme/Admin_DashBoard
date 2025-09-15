@@ -3,9 +3,12 @@ const hbs = require("hbs");
 function registerHelpers() {
 
 
-  hbs.registerHelper('eq', function (arg1, arg2, options) {
-    return arg1 === arg2 ? options.fn(this) : options.inverse(this);
-});
+  hbs.registerHelper('eq', (a, b) => a === b);
+
+
+//   hbs.registerHelper('eq', function (arg1, arg2, options) {
+//     return arg1 === arg2 ? options.fn(this) : options.inverse(this);
+// });
 
 
 

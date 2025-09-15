@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     status: { type: String, required: false, default: 'Active' },
     isVerified: { type: Boolean, required: false, default: false },
     recentSearches: { type: [String], required: false }, // ["rest", "test", "hello"]
-    favouriteProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: "products", default: [] }],
+    favouriteProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product", default: [] }],
     fcmToken: { type: String, required: false },
     fcmTokenType: { type: String, required: false },
     isForgotOTP: { type: Boolean, required: false },

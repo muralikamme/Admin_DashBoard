@@ -89,7 +89,7 @@ module.exports.isAdminAuth = (req, res, next) => {
         console.log("File path is undefined. Skipping deletion.");
         return true;
     }
-    const FilePath = path.join(__dirname, '../public/images/', filePath); //  FilePath = C:\Users\Lahari\Desktop\ANALOGUE\Projects\NodeJs Projects\buyKeys\buyKeysBackend\images\winners\1722353829278.jpg
+    const FilePath = path.join(__dirname, '../public/images/', filePath); 
     // console.log(FilePath); // check the path if necessary
     try {
         await fs.access(FilePath);

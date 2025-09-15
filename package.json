@@ -1,7 +1,6 @@
 {
   "name": "e-commerce",
   "version": "1.0.0",
-  
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,12 +22,11 @@
     "express": "^5.1.0",
     "express-fileupload": "^1.5.2",
     "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.17.2",
     "nodemon": "^3.1.10",
     "uuid": "^13.0.0"
-    
   }
- 
 }

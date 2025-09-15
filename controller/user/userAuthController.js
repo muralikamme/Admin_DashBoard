@@ -10,11 +10,20 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   register: async (req, res) => {
     try {
+
+
       const { name, email, phone, password } = req.body;
       const picture = req.files.profilePicture || null;
 
+       const existingUser = await Customer.findOne( {$or:[{email:email},{phone:phone}] })
+
+console.log(existingUser,"iii")
+       if(existingUser){
+        return res.status(400).json({message: "This email or phone number is already registered.Please use a different one or log in."})
+       }
+
       if (!name || !email || !phone) {
-        return req.status(401).json({ message: "missing required fileds" });
+        return res.status(401).json({ message: "missing required fileds" });
       }
 
       console.log(name, email, phone, password, "oo");
@@ -26,7 +35,7 @@ module.exports = {
       if (userExists) {
         return res
           .status(201)
-          .json({ message: "user alredy exist please login!" });
+          .json({ message: "user already exist please login!" });
       }
       const hashpassword = await bcrypt.hash(password, 10);
       const pass = hashpassword;
@@ -52,7 +61,7 @@ module.exports = {
           .json({ message: "Signin successfull please Login", password: pass });
       }
     } catch (err) {
-      console.log({ Erro: err.message });
+      console.log({ Error: err.message });
       return res.status(500).json({ message: "Internal Server Errro" });
     }
   },

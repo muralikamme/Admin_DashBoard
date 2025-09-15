@@ -1,0 +1,27 @@
+Name: Murali kamme
+Project: R&D
+
+9:30 AM – 10:30 AM
+   *I Revised the previous concpets.
+   *Preapred a notes.
+10:30 AM – 11:30 AM
+   * i explored a banner hbs page in gavathi party.
+11:30 AM – 12:30 PM
+   * i met anwar for jquery doubts
+   *i wrote  a upload ,update & deletebanner api's in dashbaord task
+12:30 PM – 1:00 PM
+   * i wrote a homepage api  for user .
+   * i explored a express-validator
+2:00 PM – 3:00 PM
+   * I Explored  deals in gavathi party.  
+3:00 PM – 4:00 PM
+   * I wrote a deals model in dashbaord task
+   * I wrote a deals contollers.
+   *I met a naveen for doubts ,he assigned a task and changes [tasks:1.adminProfile upadtes ,2.Implemete a favouriteProducts with curdoperations]
+4:00 PM – 5:00 PM
+   * I Understood how favouriteProducts functionlity works in admin panel.
+   * I wrote a favouriteProducts schema
+5:00 PM – 6:30 PM
+   * further i wrote a ,addtofavouritlist ,allfavouiteprodutcs and removeproductfromfavouritelist apis.
+6:30 PM – 7:00 PM
+   *I explored a Gust login .

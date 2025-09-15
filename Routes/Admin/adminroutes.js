@@ -1,22 +1,35 @@
-const adminRoutes=require("express").Router()
+const adminRoutes = require("express").Router()
+const adminValidationRules = require("../../validations/allvalidation")
 
- const adminController=require("../../controller/Admin/adminController")
+ const adminController = require("../../controller/Admin/adminController")
 
-const category=require("../../controller/Admin/category")
-const banners=require("../../controller/Admin/bannercontroller")
+const category = require("../../controller/Admin/category")
+const banners = require("../../controller/Admin/bannercontroller")
+const deals = require("../../controller/Admin/deals")
 
  adminRoutes.get("/dashboard",adminController.dashboard)
 //  --------banners-------
  adminRoutes.get("/banners",banners.allBanners)
  adminRoutes.post("/addbanner",banners.addBanner)
- adminRoutes.post("/editbanner",banners.editBanner)
- adminRoutes.post("/deletebanner",banners.deleteBanner)
+ adminRoutes.post("/updatebanner/:id",banners.updateBanner)
+ adminRoutes.get("/deletebanner/:id",banners.deleteBanner)
 // -----banners
 
+
+
+
+
+// ------deals------
+
+adminRoutes.get("/deals",deals.allDeals)
+ //---------deals
+
  adminRoutes.get("/adminProfile",adminController.adminProfile)
- adminRoutes.post("/updateprofile/:id",adminController.updateProfile)
+//  adminValidationRules.adminValidationRules
+ adminRoutes.post("/updateprofile/:id" ,adminController.updateProfile)
 //  adminRoutes.post("/deleteadmin/:id",adminController.Deleteadmin)
 //------------- Products Routes-------------------
+
 
 
 
