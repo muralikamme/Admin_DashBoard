@@ -8,6 +8,9 @@ const banners=require("../../controller/Admin/bannercontroller")
  adminRoutes.get("/dashboard",adminController.dashboard)
 //  --------banners-------
  adminRoutes.get("/banners",banners.allBanners)
+ adminRoutes.post("/addbanner",banners.addBanner)
+ adminRoutes.post("/editbanner",banners.editBanner)
+ adminRoutes.post("/deletebanner",banners.deleteBanner)
 // -----banners
 
  adminRoutes.get("/adminProfile",adminController.adminProfile)

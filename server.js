@@ -6,11 +6,6 @@ const path=require("path")
 const fileUpload = require("express-fileupload")
 const registerHelper=require("./helper/helper")
 
-
-
-
-
-
 const AdminauthRoutes=require("./Routes/Admin/auth")
 const adminRoutes=require("./Routes/Admin/adminroutes")
 // User
@@ -18,12 +13,9 @@ const UserAuthRoutes=require("./Routes/userRoutes/userAuth")
 const userconRoutes=require("./Routes/userRoutes/usercontollerRoutes")
 const expressSession = require("express-session");
 const MongoDBStore=require("connect-mongodb-session")(expressSession)
-
-
+// (expressSession)
 const flash = require("connect-flash");
 const { isAdminAuth ,isValidToken} = require("./middlewares/authmiddleware");
-const {default: mongoose}=require("mongoose")
-// const MongoStore=require("connect-mongo")
 
 
 const app=express()
@@ -92,7 +84,7 @@ app.use("/userAuth",UserAuthRoutes)
 
 app.use("/user", isValidToken,userconRoutes)
 
-app.use(express.static(path.join(__dirname, "node_modules/bootstrap/dist/")));
+
 
 
 app.listen(process.env.PORT,()=>{

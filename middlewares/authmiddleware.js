@@ -119,10 +119,15 @@ exports.handleFileUpload = async (file, destination) => {
   }
 
   const extension = path.extname(file.name);
+  console.log(path.extname,"rrr")
+//   console.log(extension,"eeee")
   const filename = `${Date.now()}${extension}`;
+//   console.log(filename,"ffff")
   const filePath = path.join(uploadDir, filename);
-
+//   console.log(filePath,"ooo")
+  
   await file.mv(filePath); // Move file
+  
   return `images/${destination}/${filename}`; // return relative path
 };
 
