@@ -42,7 +42,7 @@ module.exports = {
       if (!status) {
         res.status(500).json({ message: "Empty body " });
       }
-      const newBanner = req.files.bannerPicture;
+      const newBanner = req.files.bannerPicture || null ;
       const bannerupload = await handleFileUpload(newBanner, "banner");
       // console.log(newBanner,"nneewnne",status)
       const update = await banners.findByIdAndUpdate(id, {

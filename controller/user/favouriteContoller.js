@@ -6,12 +6,8 @@ module.exports = {
   AddToFavourite: async (req, res) => {
     try {
       const userId = req.session.user._id;
-      console.log(req.session.user, "pppp");
-      console.log(userId, "userididid");
       const { productId } = req.body;
-      console.log(productId, "prodyctididi");
       const productExists = await Product.findOne({ _id: productId });
-      console.log(productExists, "id");
       if (!productExists) {
         return res.status(400).json({ message: "Invalid ProductId" });
       }

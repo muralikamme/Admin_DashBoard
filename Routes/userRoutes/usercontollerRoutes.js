@@ -5,6 +5,7 @@ const  favouiteproduct = require("../../controller/user/favouriteContoller")
 
 userconRoutes.get("/userproile",userController.profile)
 userconRoutes.get("/homepage",homepageController.homePage)
+userconRoutes.get("/allproducts",homepageController.allProducts)
 userconRoutes.post("/favouirte",favouiteproduct.AddToFavourite)
 userconRoutes.get("/allfavouirteproducts",favouiteproduct.allFavouiteProducts)
 userconRoutes.post("/removeproductfromfav",favouiteproduct.removeProductFromFav)

@@ -5,7 +5,7 @@ module.exports = {
   allCategorys: async (req, res) => {
     try {
       const allcategory = await category.find({});
-      // console.log(allcategory)
+    
       return res.render("allcategory", {
         allcategory,
       });

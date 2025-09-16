@@ -10,8 +10,6 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   register: async (req, res) => {
     try {
-
-
       const { name, email, phone, password } = req.body;
       const picture = req.files.profilePicture || null;
 
